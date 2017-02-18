@@ -29,9 +29,9 @@ TutorialApplication::~TutorialApplication(void)
 void TutorialApplication::createScene(void)
 {
 	// Set the scene's ambient light
-	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
+	mSceneMgr->setAmbientLight(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
 	mCamera->setPosition(0, 47, 222);
-
+	
 	// Create an Entity
 	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
 	// Create a SceneNode and attach the Entity to it
@@ -57,6 +57,11 @@ void TutorialApplication::createScene(void)
 	ogreNode4->setPosition(-84, 48, 0);
 	ogreNode4->roll(Ogre::Degree(-90));
 	ogreNode4->attachObject(ogreEntity4);
+	
+
+	Ogre::Entity* car = mSceneMgr->createEntity("star1.mesh");
+	Ogre::SceneNode* carNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	carNode->attachObject(car);
 
 	// Create a Light and set its position
 	Ogre::Light* light = mSceneMgr->createLight("MainLight");
