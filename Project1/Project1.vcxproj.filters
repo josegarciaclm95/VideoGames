@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\TutorialFramework_SkyTerrainFog\BaseApplication.cpp">
+    <ClCompile Include="..\TutorialFramework_Cameras\BaseApplication.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\TutorialFramework_SkyTerrainFog\TutorialApplication.cpp">
+    <ClCompile Include="..\TutorialFramework_Cameras\TutorialApplication.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\TutorialFramework_SkyTerrainFog\BaseApplication.h">
+    <ClInclude Include="..\TutorialFramework_Cameras\BaseApplication.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\TutorialFramework_SkyTerrainFog\TutorialApplication.h">
+    <ClInclude Include="..\TutorialFramework_Cameras\TutorialApplication.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

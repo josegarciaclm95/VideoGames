@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\TutorialFramework_SkyTerrainFog\BaseApplication.cpp" />
-    <ClCompile Include="..\TutorialFramework_SkyTerrainFog\TutorialApplication.cpp" />
+    <ClCompile Include="..\TutorialFramework_Cameras\BaseApplication.cpp" />
+    <ClCompile Include="..\TutorialFramework_Cameras\TutorialApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\TutorialFramework_SkyTerrainFog\BaseApplication.h" />
-    <ClInclude Include="..\TutorialFramework_SkyTerrainFog\TutorialApplication.h" />
+    <ClInclude Include="..\TutorialFramework_Cameras\BaseApplication.h" />
+    <ClInclude Include="..\TutorialFramework_Cameras\TutorialApplication.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D029B713-B85D-4437-ABA8-AFD4221DA338}</ProjectGuid>
