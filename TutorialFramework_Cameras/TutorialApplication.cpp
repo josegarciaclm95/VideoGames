@@ -16,7 +16,7 @@ http://www.ogre3d.org/wiki/
 */
 
 #include "TutorialApplication.h"
-
+//#include "../RapidXML/DotSceneLoader.h"
 //---------------------------------------------------------------------------
 TutorialApplication::TutorialApplication(void)
 {
@@ -29,9 +29,25 @@ TutorialApplication::~TutorialApplication(void)
 //---------------------------------------------------------------------------
 void TutorialApplication::createScene(void)
 {
-	mSceneMgr->setAmbientLight(Ogre::ColourValue(0, 0, 0));
+	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.0f, 0.0f, 0.0f));
+	mCamera->setPosition(0, 47, 222);
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	/*
+	DotSceneLoader dotSceneLoader;
+	Ogre::String resourceGroup = "ExampleScene";
 
+	Ogre::ResourceGroupManager* resMgr = Ogre::ResourceGroupManager::getSingletonPtr();
+	// Add the relative location to the folders containing the resources.
+	resMgr->addResourceLocation("../../media/prueba", "FileSystem", resourceGroup);
+	resMgr->addResourceLocation("../../media/prueba/mesh", "FileSystem", resourceGroup);
+	resMgr->addResourceLocation("../../media/prueba/program", "FileSystem", resourceGroup);
+	resMgr->addResourceLocation("../../media/prueba/material", "FileSystem", resourceGroup);
+	resMgr->addResourceLocation("../../media/prueba/bitmap", "FileSystem", resourceGroup);
+	resMgr->initialiseResourceGroup(resourceGroup);
+
+	// The loader will automatically find the file in the resource group.
+	dotSceneLoader.parseDotScene("prueba.scene", resourceGroup, mSceneMgr);
+	*/	
 	Ogre::Entity* ninjaEntity = mSceneMgr->createEntity("ninja.mesh");
 	ninjaEntity->setCastShadows(true);
 	mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(ninjaEntity);
