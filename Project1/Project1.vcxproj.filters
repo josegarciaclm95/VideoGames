@@ -18,7 +18,7 @@
     <ClCompile Include="..\BaseApplication\BaseApplication.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\TutorialFramework_FrameListeners\TutorialApplication.cpp">
+    <ClCompile Include="..\Tutorial_BufferedInput\TutorialApplication.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
@@ -26,7 +26,7 @@
     <ClInclude Include="..\BaseApplication\BaseApplication.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\TutorialFramework_FrameListeners\TutorialApplication.h">
+    <ClInclude Include="..\Tutorial_BufferedInput\TutorialApplication.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
