@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Tutorial_VPRN\BaseApplication.cpp">
+    <ClCompile Include="..\BaseApplication\BaseApplication.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\Tutorial_VPRN\TutorialApplication.cpp">
+    <ClCompile Include="..\TutorialFramework_FrameListeners\TutorialApplication.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Tutorial_VPRN\BaseApplication.h">
+    <ClInclude Include="..\BaseApplication\BaseApplication.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\Tutorial_VPRN\TutorialApplication.h">
+    <ClInclude Include="..\TutorialFramework_FrameListeners\TutorialApplication.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

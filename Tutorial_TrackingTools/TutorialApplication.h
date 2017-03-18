@@ -26,19 +26,18 @@ http://www.ogre3d.org/wiki/
 class TutorialApplication : public BaseApplication
 {
 public:
-    TutorialApplication(void);
-    virtual ~TutorialApplication(void);
+	TutorialApplication(void);
+	virtual ~TutorialApplication(void);
 
 protected:
-    virtual void createScene(void);
-	// Ogre::FrameListener
+	virtual void createScene(void);
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
 private:
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
-	static void VRPN_CALLBACK handleIotracker(void* userData, const vrpn_TRACKERCB t);
-	
-	vrpn_Tracker_Remote* iotracker;
+	static void VRPN_CALLBACK handleRightHandTracker(void* userData, const vrpn_TRACKERCB t);
+
+	vrpn_Tracker_Remote* rightHandTracker;
 	vrpn_TRACKERCB data;
 	Ogre::SceneNode* targetNode;
 };

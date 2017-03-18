@@ -29,9 +29,8 @@ TutorialApplication::~TutorialApplication(void)
 //---------------------------------------------------------------------------
 void TutorialApplication::createScene(void)
 {
-
-	iotracker = new vrpn_Tracker_Remote("iotracker@161.67.196.59:3883");
-	iotracker->register_change_handler(this, handleIotracker);
+	rightHandTracker = new vrpn_Tracker_Remote("Right_hand@161.67.196.44:3883");
+	rightHandTracker->register_change_handler(this, handleRightHandTracker);
 	vrpn_TRACKERCB blank = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
 	data = blank;
 
@@ -54,13 +53,12 @@ void TutorialApplication::createScene(void)
 	targetNode = headNode;
 }
 
-
 //-------------------------------------------------------------------------------------
 bool TutorialApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	bool ret = BaseApplication::frameRenderingQueued(evt);
 
-	iotracker->mainloop();
+	rightHandTracker->mainloop();
 
 	if (!processUnbufferedInput(evt)) return false;
 
@@ -75,16 +73,10 @@ bool TutorialApplication::processUnbufferedInput(const Ogre::FrameEvent& evt)
 	return true;
 }
 //-------------------------------------------------------------------------------------
-void VRPN_CALLBACK TutorialApplication::handleIotracker(void* userData, const vrpn_TRACKERCB t)
+void VRPN_CALLBACK TutorialApplication::handleRightHandTracker(void* userData, const vrpn_TRACKERCB t)
 {
 	vrpn_TRACKERCB *pData = &(((TutorialApplication*)userData)->data);
-
-	if (t.sensor == 3) {
-		*pData = t;
-		pData->pos[0] /= 1000.0; // mm to m
-		pData->pos[1] /= 1000.0;
-		pData->pos[2] /= 1000.0;
-	}
+	*pData = t;
 }
 //-------------------------------------------------------------------------------------
 

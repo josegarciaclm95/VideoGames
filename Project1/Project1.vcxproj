@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Tutorial_VPRN\BaseApplication.cpp" />
-    <ClCompile Include="..\Tutorial_VPRN\TutorialApplication.cpp" />
+    <ClCompile Include="..\BaseApplication\BaseApplication.cpp" />
+    <ClCompile Include="..\TutorialFramework_FrameListeners\TutorialApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Tutorial_VPRN\BaseApplication.h" />
-    <ClInclude Include="..\Tutorial_VPRN\TutorialApplication.h" />
+    <ClInclude Include="..\BaseApplication\BaseApplication.h" />
+    <ClInclude Include="..\TutorialFramework_FrameListeners\TutorialApplication.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D029B713-B85D-4437-ABA8-AFD4221DA338}</ProjectGuid>
