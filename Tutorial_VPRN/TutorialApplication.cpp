@@ -29,11 +29,8 @@ TutorialApplication::~TutorialApplication(void)
 //---------------------------------------------------------------------------
 void TutorialApplication::createScene(void)
 {
-
-	iotracker = new vrpn_Tracker_Remote("iotracker@161.67.196.59:3883");
-	iotracker->register_change_handler(this, handleIotracker);
-	vrpn_TRACKERCB blank = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
-	data = blank;
+	vrpnButton = new vrpn_Button_Remote("Mouse0@localhost");
+	vrpnButton->register_change_handler(this, handleButton);
 
 	// Set the scene's ambient light
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
@@ -50,41 +47,22 @@ void TutorialApplication::createScene(void)
 	light->setPosition(20.0f, 80.0f, 50.0f);
 
 	mCamera->setPosition(Ogre::Vector3(0, 0, 8));
-	headNode->scale(0.01, 0.01, 0.01);
-	targetNode = headNode;
+	//headNode->scale(0.01, 0.01, 0.01);
 }
 
-
+//-------------------------------------------------------------------------------------
+void VRPN_CALLBACK TutorialApplication::handleButton(void* userData, const vrpn_BUTTONCB b)
+{
+	Ogre::Light *light = ((TutorialApplication*)userData)->mSceneMgr->getLight("MainLight");
+	if (b.button == 0 && b.state == 1) light->setVisible(!light->isVisible());
+}
 //-------------------------------------------------------------------------------------
 bool TutorialApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	bool ret = BaseApplication::frameRenderingQueued(evt);
-
-	iotracker->mainloop();
-
-	if (!processUnbufferedInput(evt)) return false;
-
-	return ret;
-}
-//-------------------------------------------------------------------------------------
-bool TutorialApplication::processUnbufferedInput(const Ogre::FrameEvent& evt)
-{
-	targetNode->setPosition(Ogre::Vector3(data.pos[0], data.pos[1], data.pos[2]));
-	targetNode->setOrientation(data.quat[3], data.quat[0], data.quat[1], data.quat[2]);
-
+	if (!ret) return false;
+	vrpnButton->mainloop();
 	return true;
-}
-//-------------------------------------------------------------------------------------
-void VRPN_CALLBACK TutorialApplication::handleIotracker(void* userData, const vrpn_TRACKERCB t)
-{
-	vrpn_TRACKERCB *pData = &(((TutorialApplication*)userData)->data);
-
-	if (t.sensor == 3) {
-		*pData = t;
-		pData->pos[0] /= 1000.0; // mm to m
-		pData->pos[1] /= 1000.0;
-		pData->pos[2] /= 1000.0;
-	}
 }
 //-------------------------------------------------------------------------------------
 

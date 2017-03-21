@@ -31,7 +31,9 @@ public:
 
 protected:
 	virtual void createScene(void);
+	/*
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+
 
 private:
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
@@ -40,6 +42,7 @@ private:
 	vrpn_Tracker_Remote* iotracker;
 	vrpn_TRACKERCB data;
 	Ogre::SceneNode* targetNode;
+*/
 };
 
 //---------------------------------------------------------------------------

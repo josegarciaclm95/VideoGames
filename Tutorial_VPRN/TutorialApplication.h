@@ -19,7 +19,7 @@ http://www.ogre3d.org/wiki/
 #define __TutorialApplication_h_
 
 #include "BaseApplication.h"
-#include "vrpn_Tracker.h"
+#include "vrpn_Button.h"
 
 //---------------------------------------------------------------------------
 
@@ -33,14 +33,8 @@ protected:
     virtual void createScene(void);
 	// Ogre::FrameListener
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-
-private:
-	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
-	static void VRPN_CALLBACK handleIotracker(void* userData, const vrpn_TRACKERCB t);
-	
-	vrpn_Tracker_Remote* iotracker;
-	vrpn_TRACKERCB data;
-	Ogre::SceneNode* targetNode;
+	static void VRPN_CALLBACK handleButton(void* userData, const vrpn_BUTTONCB b);
+	vrpn_Button_Remote* vrpnButton;
 };
 
 //---------------------------------------------------------------------------

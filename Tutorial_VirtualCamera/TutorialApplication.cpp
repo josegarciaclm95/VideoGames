@@ -16,6 +16,7 @@ http://www.ogre3d.org/wiki/
 */
 
 #include "TutorialApplication.h"
+#include <iostream>
 
 //---------------------------------------------------------------------------
 TutorialApplication::TutorialApplication(void)
@@ -29,36 +30,78 @@ TutorialApplication::~TutorialApplication(void)
 //---------------------------------------------------------------------------
 void TutorialApplication::createScene(void)
 {
+	/*
+	iotracker = new vrpn_Tracker_Remote("iotracker@161.67.196.59:3883");
+	iotracker->register_change_handler(this, handleIotracker);
+	vrpn_TRACKERCB blank = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+	data = blank;
+	*/
+	// Set the scene's ambient light
+	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
+	mCamera->setPosition(0, 47, 222);
 
+	// Create an Entity
+	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
+	// Create a SceneNode and attach the Entity to it
+	Ogre::SceneNode* headNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
+	headNode->attachObject(ogreHead);
+
+	//Left Hand
+	Ogre::Entity* leftHandEntity = mSceneMgr->createEntity("hand.mesh");
+	Ogre::SceneNode* leftHand = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	leftHand->setPosition(20, 104, 0);
+	leftHand->attachObject(leftHandEntity);
+
+	//Right Hand
+	Ogre::Entity* rightHandEntity = mSceneMgr->createEntity("hand.mesh");
+	Ogre::SceneNode* rightHand = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	rightHand->yaw(Ogre::Degree(180));
+	rightHand->setPosition(0, 104, -5);
+	rightHand->attachObject(rightHandEntity);
+
+	OutputDebugString("Hello World");
+
+	Ogre::Entity* ogreEntity3 = mSceneMgr->createEntity("ogrehead.mesh");
+	Ogre::SceneNode* ogreNode3 = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	ogreNode3->setPosition(0, -104, 120);
+	ogreNode3->pitch(Ogre::Degree(-45));
+	ogreNode3->attachObject(ogreEntity3);
+	
+	Ogre::Entity* ogreEntity4 = mSceneMgr->createEntity("ogrehead.mesh");
+	Ogre::SceneNode* ogreNode4 = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	ogreNode4->setPosition(0, 0, 600);
+	ogreNode4->scale(2, 2, 2);
+	ogreNode4->yaw(Ogre::Degree(180));
+	ogreNode4->attachObject(ogreEntity4);
+	/*
+	Ogre::Entity* ogreEntity2 = mSceneMgr->createEntity("ogrehead.mesh");
+	Ogre::SceneNode* ogreNode2 = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	ogreNode2->setPosition(0, 104, 0);
+	ogreNode2->attachObject(ogreEntity2);
+	*/
+	// Create a Light and set its position
+	Ogre::Light* light = mSceneMgr->createLight("MainLight");
+	light->setPosition(20.0f, 80.0f, 50.0f);
+
+	//mCamera->setPosition(Ogre::Vector3(0, 0, 8));
+	//headNode->scale(0.01, 0.01, 0.01);
+	/*
 	Ogre::Camera* newCamera = mSceneMgr->createCamera("NewCam");
 	mWindow->getViewport(0)->setCamera(newCamera);
 	newCamera->setPosition(Ogre::Vector3(0, 0, 0));
 	newCamera->lookAt(Ogre::Vector3(0, 0, -1));
 	newCamera->setNearClipDistance(0.1);
-	Ogre::SceneNode* camNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	camNode->attachObject(newCamera);
-	targetNode = camNode;
-
-	// Set the scene's ambient light
-	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
-
-	// Create an Entity
-	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
-
-	// Create a SceneNode and attach the Entity to it
-	Ogre::SceneNode* headNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
-	headNode->attachObject(ogreHead);
-
-	// Create a Light and set its position
-	Ogre::Light* light = mSceneMgr->createLight("MainLight");
-	light->setPosition(20.0f, 80.0f, 50.0f);
-
-	mCamera->setPosition(Ogre::Vector3(0, 0, 8));
-	headNode->scale(0.01, 0.01, 0.01);
-	targetNode = headNode;
+	Ogre::SceneNode* hmdNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	Ogre::SceneNode* eyeNode = hmdNode->createChildSceneNode();
+	eyeNode->translate(0.0, -0.1, 0.05);
+	eyeNode->attachObject(newCamera);
+	targetNode = hmdNode;
+	*/
+	//targetNode = headNode;
 }
 
 //-------------------------------------------------------------------------------------
+/*
 bool TutorialApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	bool ret = BaseApplication::frameRenderingQueued(evt);
@@ -90,7 +133,7 @@ void VRPN_CALLBACK TutorialApplication::handleIotracker(void* userData, const vr
 	}
 }
 //-------------------------------------------------------------------------------------
-
+*/
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"

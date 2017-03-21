@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\BaseApplication\BaseApplication.cpp">
+    <ClCompile Include="..\Tutorial_VirtualCamera\BaseApplication.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\Tutorial_BufferedInput\TutorialApplication.cpp">
+    <ClCompile Include="..\Tutorial_VirtualCamera\TutorialApplication.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\BaseApplication\BaseApplication.h">
+    <ClInclude Include="..\Tutorial_VirtualCamera\BaseApplication.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\Tutorial_BufferedInput\TutorialApplication.h">
+    <ClInclude Include="..\Tutorial_VirtualCamera\TutorialApplication.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
