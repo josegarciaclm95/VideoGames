@@ -19,37 +19,17 @@ http://www.ogre3d.org/wiki/
 #define __TutorialApplication_h_
 
 #include "BaseApplication.h"
-#include "vrpn_Tracker.h"
 
 //---------------------------------------------------------------------------
 
 class TutorialApplication : public BaseApplication
 {
 public:
-	TutorialApplication(void);
-	virtual ~TutorialApplication(void);
+    TutorialApplication(void);
+    virtual ~TutorialApplication(void);
 
 protected:
-	virtual void createScene(void);
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-
-private:
-	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
-	static void VRPN_CALLBACK handleRightHandTracker(void* userData, const vrpn_TRACKERCB t);
-	static void VRPN_CALLBACK handleLeftHandTracker(void* userData, const vrpn_TRACKERCB t);
-	//static void VRPN_CALLBACK handleCameraTracker(void* userData, const vrpn_TRACKERCB t);
-
-	vrpn_Tracker_Remote* rightHandTracker;
-	vrpn_Tracker_Remote* leftHandTracker;
-	//vrpn_Tracker_Remote* cameraTracker;
-
-	vrpn_TRACKERCB right_data;
-	vrpn_TRACKERCB left_data;
-	//vrpn_TRACKERCB camera_data;
-
-	Ogre::SceneNode* rightTargetNode;
-	Ogre::SceneNode* leftTargetNode;
-	//Ogre::SceneNode* cameraTargetNode;
+    virtual void createScene(void);
 };
 
 //---------------------------------------------------------------------------

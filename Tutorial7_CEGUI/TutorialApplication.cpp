@@ -29,44 +29,9 @@ TutorialApplication::~TutorialApplication(void)
 //---------------------------------------------------------------------------
 void TutorialApplication::createScene(void)
 {
-	vrpnButton = new vrpn_Button_Remote("Mouse0@localhost");
-	vrpnButton->register_change_handler(this, handleButton);
-
-	// Set the scene's ambient light
-	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
-
-	// Create an Entity
-	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
-
-	// Create a SceneNode and attach the Entity to it
-	Ogre::SceneNode* headNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
-	headNode->attachObject(ogreHead);
-
-	// Create a Light and set its position
-	Ogre::Light* light = mSceneMgr->createLight("MainLight");
-	light->setPosition(20.0f, 80.0f, 50.0f);
-
-	mCamera->setPosition(Ogre::Vector3(0, 0, 8));
-	//headNode->scale(0.01, 0.01, 0.01);
+    // Create your scene here :)
 }
-
-//-------------------------------------------------------------------------------------
-void VRPN_CALLBACK TutorialApplication::handleButton(void* userData, const vrpn_BUTTONCB b)
-{
-	//OutputDebugString("handleButton \n");
-	//OutputDebugString(Ogre::StringConverter::toString(b.c));
-	Ogre::Light *light = ((TutorialApplication*)userData)->mSceneMgr->getLight("MainLight");
-	if (b.button == 0 && b.state == 1) light->setVisible(!light->isVisible());
-}
-//-------------------------------------------------------------------------------------
-bool TutorialApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
-{
-	bool ret = BaseApplication::frameRenderingQueued(evt);
-	if (!ret) return false;
-	vrpnButton->mainloop();
-	return true;
-}
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
