@@ -37,19 +37,19 @@ private:
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 	static void VRPN_CALLBACK handleRightHandTracker(void* userData, const vrpn_TRACKERCB t);
 	static void VRPN_CALLBACK handleLeftHandTracker(void* userData, const vrpn_TRACKERCB t);
-	//static void VRPN_CALLBACK handleCameraTracker(void* userData, const vrpn_TRACKERCB t);
+	static void VRPN_CALLBACK handleCameraTracker(void* userData, const vrpn_TRACKERCB t);
 
 	vrpn_Tracker_Remote* rightHandTracker;
 	vrpn_Tracker_Remote* leftHandTracker;
-	//vrpn_Tracker_Remote* cameraTracker;
+	vrpn_Tracker_Remote* cameraTracker;
 
 	vrpn_TRACKERCB right_data;
 	vrpn_TRACKERCB left_data;
-	//vrpn_TRACKERCB camera_data;
+	vrpn_TRACKERCB camera_data;
 
 	Ogre::SceneNode* rightTargetNode;
 	Ogre::SceneNode* leftTargetNode;
-	//Ogre::SceneNode* cameraTargetNode;
+	Ogre::SceneNode* cameraTargetNode;
 };
 
 //---------------------------------------------------------------------------

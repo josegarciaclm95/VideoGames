@@ -41,7 +41,7 @@ void BasicTutorial7::createScene(void)
 
 	madnessText = wmgr.createWindow("TaharezLook/Button", "CEGUIDemo/Sheet/MadnessText");
 	madnessText->setText("MADNESS ESCAPE[colour='FFFF0000']");
-	madnessText->setSize(CEGUI::USize(CEGUI::UDim(0.34f, 0.0f), CEGUI::UDim(0.35f, 0.0f)));
+	madnessText->setSize(CEGUI::USize(CEGUI::UDim(0.35f, 0.0f), CEGUI::UDim(0.35f, 0.0f)));
 	madnessText->setPosition(CEGUI::UVector2(CEGUI::UDim(0.30f, 0.0f), CEGUI::UDim(0.20f, 0.0f)));
 
 	sheet->addChild(quitB);
@@ -69,13 +69,13 @@ void BasicTutorial7::createScene(void)
 		Ogre::TU_RENDERTARGET);
 	Ogre::RenderTexture *rtex = tex->getBuffer()->getRenderTarget();
 	
-	Ogre::Camera *cam = mSceneMgr->createCamera("RTTCam");
-	cam->setPosition(100, -100, -400);
-	cam->lookAt(0, 0, -300);
-	Ogre::Viewport *v = rtex->addViewport(cam);
-	v->setOverlaysEnabled(false);
-	v->setClearEveryFrame(true);
-	v->setBackgroundColour(Ogre::ColourValue::Black);
+	//Ogre::Camera *cam = mSceneMgr->createCamera("RTTCam");
+	//cam->setPosition(100, -100, -400);
+	//cam->lookAt(0, 0, -300);
+	//Ogre::Viewport *v = rtex->addViewport(cam);
+	//v->setOverlaysEnabled(false);
+	//v->setClearEveryFrame(true);
+	//v->setBackgroundColour(Ogre::ColourValue::Black);
 	CEGUI::Texture &guiTex = mRenderer->createTexture("textname", tex);
 
 	const CEGUI::Rectf rect(CEGUI::Vector2f(0.0f, 0.0f), guiTex.getOriginalDataSize());
@@ -101,6 +101,7 @@ bool BasicTutorial7::createGame(const CEGUI::EventArgs &e)
 	madnessText->destroy();
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
+	mCamera->setPosition(0, 47, 222);
 	Ogre::Entity* leftHandEntity = mSceneMgr->createEntity("hand.mesh");
 	Ogre::SceneNode* leftHand = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	leftHand->pitch(Ogre::Degree(180));
@@ -108,7 +109,6 @@ bool BasicTutorial7::createGame(const CEGUI::EventArgs &e)
 	leftHand->setPosition(Ogre::Vector3(40.0f, 0.0f, 0.0f));
 	leftHand->scale(Ogre::Vector3(2.0f, 2.0f, 2.0f));
 	leftHand->attachObject(leftHandEntity);
-
 	//Right Hand
 	Ogre::Entity* rightHandEntity = mSceneMgr->createEntity("hand.mesh");
 	Ogre::SceneNode* rightHand = mSceneMgr->getRootSceneNode()->createChildSceneNode();

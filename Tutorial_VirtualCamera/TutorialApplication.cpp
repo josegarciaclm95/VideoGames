@@ -31,23 +31,23 @@ TutorialApplication::~TutorialApplication(void)
 void TutorialApplication::createScene(void)
 {
 	
-	rightHandTracker = new vrpn_Tracker_Remote("Right_hand@161.67.196.44:3883");
+	rightHandTracker = new vrpn_Tracker_Remote("iotracker@161.67.196.59:3883");
 	rightHandTracker->register_change_handler(this, handleRightHandTracker);
 	vrpn_TRACKERCB blank1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
 	right_data = blank1;
 	
 	
-	leftHandTracker = new vrpn_Tracker_Remote("Left_hand@161.67.196.44:3883");
+	leftHandTracker = new vrpn_Tracker_Remote("iotracker@161.67.196.59:3883");
 	leftHandTracker->register_change_handler(this, handleLeftHandTracker);
 	vrpn_TRACKERCB blank2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
 	left_data = blank2;
 
-	/*
+	
 	cameraTracker = new vrpn_Tracker_Remote("iotracker@161.67.196.59:3883");
 	cameraTracker->register_change_handler(this, handleCameraTracker);
 	vrpn_TRACKERCB blank3 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
 	camera_data = blank3;
-	*/
+	
 	// Set the scene's ambient light
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
 	//mCamera->setPosition(0, 47, 222);
@@ -73,9 +73,7 @@ void TutorialApplication::createScene(void)
 	Ogre::SceneNode* rightHand = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	rightHand->pitch(Ogre::Degree(180));
 	rightHand->yaw(Ogre::Degree(90));
-	//rightHand->pitch(Ogre::Degree(90));
 	rightHand->setPosition(Ogre::Vector3(-40.0f, 0.0f, 0.0f));
-	//rightHand->pitch(Ogre::Degree(-45));
 	rightHand->scale(Ogre::Vector3(2.0f, 2.0f, 2.0f));
 	rightHand->attachObject(rightHandEntity);
 
@@ -105,7 +103,7 @@ void TutorialApplication::createScene(void)
 
 	//mCamera->setPosition(Ogre::Vector3(0, 0, 8));
 	//headNode->scale(0.01, 0.01, 0.01);
-	/*
+	
 	Ogre::Camera* newCamera= mSceneMgr->createCamera("NewCam");
 	mWindow->getViewport(0)->setCamera(newCamera);
 	newCamera->setPosition(Ogre::Vector3(0,0,0));
@@ -116,7 +114,7 @@ void TutorialApplication::createScene(void)
 	eyeNode->translate(0.0, -0.1, 0.05);
 	eyeNode->attachObject(newCamera);
 	cameraTargetNode = hmdNode;
-	*/
+	
 	leftTargetNode =  leftHand;
 	rightTargetNode = rightHand;
 }
@@ -129,7 +127,7 @@ bool TutorialApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 	rightHandTracker->mainloop();
 	leftHandTracker->mainloop();
-	//cameraTracker->mainloop();
+	cameraTracker->mainloop();
 	if(!processUnbufferedInput(evt)) return false;
 
 	return ret;
@@ -144,29 +142,39 @@ bool TutorialApplication::processUnbufferedInput(const Ogre::FrameEvent& evt)
 	//sprintf(buffer1, "Camera data %f %f %f\n", camera_data.pos[0], camera_data.pos[1], camera_data.pos[2]);
 	//OutputDebugString(buffer1);
 
-	//rightTargetNode->setPosition(Ogre::Vector3(right_data.pos[0] * 75, right_data.pos[1] * 75, right_data.pos[2] * 75));
-	//rightTargetNode->setOrientation(right_data.quat[3], right_data.quat[0], right_data.quat[1], right_data.quat[2]);
-	//leftTargetNode->setPosition(Ogre::Vector3(left_data.pos[0] * 75, left_data.pos[1] * 75, left_data.pos[2] * 75));
-	//leftTargetNode->setOrientation(left_data.quat[3], left_data.quat[0], left_data.quat[1], left_data.quat[2]);
-	//cameraTargetNode->setPosition(Ogre::Vector3(camera_data.pos[0] * 75, camera_data.pos[1] * 75, camera_data.pos[2] * 75));
-	//cameraTargetNode->setOrientation(camera_data.quat[3], camera_data.quat[0], camera_data.quat[1], camera_data.quat[2]);
+	rightTargetNode->setPosition(Ogre::Vector3(right_data.pos[0] * 75, right_data.pos[1] * 75, right_data.pos[2] * 75));
+	rightTargetNode->setOrientation(right_data.quat[3], right_data.quat[0], right_data.quat[1], right_data.quat[2]);
+	leftTargetNode->setPosition(Ogre::Vector3(left_data.pos[0] * 75, left_data.pos[1] * 75, left_data.pos[2] * 75));
+	leftTargetNode->setOrientation(left_data.quat[3], left_data.quat[0], left_data.quat[1], left_data.quat[2]);
+	cameraTargetNode->setPosition(Ogre::Vector3(camera_data.pos[0] * 75, camera_data.pos[1] * 75, camera_data.pos[2] * 75));
+	cameraTargetNode->setOrientation(camera_data.quat[3], camera_data.quat[0], camera_data.quat[1], camera_data.quat[2]);
 	return true;
 }
 //-------------------------------------------------------------------------------------
 void VRPN_CALLBACK TutorialApplication::handleRightHandTracker(void* userData, const vrpn_TRACKERCB t)
 {
 	vrpn_TRACKERCB *pData = &(((TutorialApplication*)userData)->right_data);
-	*pData = t;
+	if (t.sensor == 1) {
+		*pData = t;
+		pData->pos[0] /= 1000.0; // mm to m
+		pData->pos[1] /= 1000.0;
+		pData->pos[2] /= 1000.0;
+	}
 }
 //-------------------------------------------------------------------------------------
 
 void VRPN_CALLBACK TutorialApplication::handleLeftHandTracker(void* userData, const vrpn_TRACKERCB t)
 {
 	vrpn_TRACKERCB *pData = &(((TutorialApplication*)userData)->left_data);
-	*pData = t;
+	if (t.sensor == 3) {
+		*pData = t;
+		pData->pos[0] /= 1000.0; // mm to m
+		pData->pos[1] /= 1000.0;
+		pData->pos[2] /= 1000.0;
+	}
 }
 //-------------------------------------------------------------------------------------
-/*
+
 void VRPN_CALLBACK TutorialApplication::handleCameraTracker(void* userData, const vrpn_TRACKERCB t)
 {
 	vrpn_TRACKERCB *pData = &(((TutorialApplication*)userData)->camera_data);
@@ -177,7 +185,7 @@ void VRPN_CALLBACK TutorialApplication::handleCameraTracker(void* userData, cons
 		pData->pos[2] /= 1000.0;
 	}
 }
-*/
+
 //-------------------------------------------------------------------------------------
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

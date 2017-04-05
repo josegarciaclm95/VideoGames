@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Tutorial7_CEGUI\BaseApplication.cpp" />
-    <ClCompile Include="..\Tutorial7_CEGUI\BasicTutorial7.cpp" />
+    <ClCompile Include="..\Tutorial_VirtualCamera\BaseApplication.cpp" />
+    <ClCompile Include="..\Tutorial_VirtualCamera\TutorialApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Tutorial7_CEGUI\BaseApplication.h" />
-    <ClInclude Include="..\Tutorial7_CEGUI\BasicTutorial7.h" />
+    <ClInclude Include="..\Tutorial_VirtualCamera\BaseApplication.h" />
+    <ClInclude Include="..\Tutorial_VirtualCamera\TutorialApplication.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D029B713-B85D-4437-ABA8-AFD4221DA338}</ProjectGuid>
