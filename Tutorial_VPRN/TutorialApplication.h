@@ -33,8 +33,9 @@ protected:
     virtual void createScene(void);
 	// Ogre::FrameListener
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+	// VRPN
 	static void VRPN_CALLBACK handleButton(void* userData, const vrpn_BUTTONCB b);
-	vrpn_Button_Remote* vrpnButton;
+	vrpn_Button_Remote* vrpnButton;	
 };
 
 //---------------------------------------------------------------------------
